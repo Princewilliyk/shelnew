@@ -15,13 +15,15 @@ int main(int argc, char *argv[], char **env)
 	ssize_t get_char;
 	pid_t childprog;
 	int status;
+	bool from_pipe =  false;
 	(void)argc;
 
-	while (1)
+	while (1 && !from_pipe)
 	{
 		if (isatty(STDIN_FILENO))
 		{
 		 	_put("shellinput$ ");
+			from_pipe = true;
 		}
 		get_char = getline(&input, &input_size, stdin);
 		if (get_char == -1)
@@ -65,4 +67,5 @@ void executer(const char *path, char **argv, char **env)
 		perror("Error (execve)");
 		exit(EXIT_FAILURE);
 	}
+
 }
