@@ -15,10 +15,10 @@ int main(int argc, char *argv[], char **env)
 	ssize_t get_char;
 	pid_t childprog;
 	int status;
-	bool from_pipe = true;
+	bool from_pipe = false;
 	(void)argc;
 
-	while (1 || !from_pipe)
+	while (1 && !from_pipe)
 	{
 		if (isatty(STDIN_FILENO == 0))
 		{
