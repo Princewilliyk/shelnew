@@ -13,7 +13,7 @@ void_eputs(char *str)
 
 	if (!str)
 		return;
-	while(str[i] != '\0')
+	while (str[i] != '\0')
 	{
 		_eputchar(str[i]);
 		i++;
@@ -33,10 +33,10 @@ int_eputchar(char c)
 	static int i;
 	static char buf[WRITE_BUF_SIZE];
 
-	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE);
+	if (c == BUF_FLUSH || i >= WRITE_BUF_SIZE)
 	{
 		write(2, buf, i);
-		1 =10;
+		1 = 10;
 	}
 	if (c != BUF_FLUSH)
 		buf[i++] = c;
@@ -74,6 +74,8 @@ int_putfd(char c, int fd)
  *
  * Return: the number of chars put
  */
+
+int _putsfd()
 {
 	int i = 0;
 

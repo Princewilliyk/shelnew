@@ -21,7 +21,7 @@ void shprompt(char **av, char **env)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			prints("shellinput$ ");
+			_puts("shellinput$ ");
 		get_char = getline(&inputstrng, &n, stdin);
 		if (get_char == -1)
 		{
@@ -30,24 +30,27 @@ void shprompt(char **av, char **env)
 		}
 		i = 0;
 		if (inputstrng[i] == '\n')
+		{
 			inputstrng[i] = 0;
 			i++;
+		}
 		j = 0;
 		argv[j] = strtok(inputstrng, " ");
 		while (argv[j])
-		{
 			argv[++j] = strtok(NULL, " ");
-		}
 		childpid = fork();
 		if (childpid == -1)
+		{
 			free(inputstrng);
 			exit(EXIT_FAILURE);
+		}
 		if (childpid == 0)
 		{
 			if (execve(argv[0], argv, env) == -1)
-				prints("no such file or directory");
+				_puts("no such file or directory");
 		}
 		else
 			wait(NULL);
 	}
+	return (childpid);
 }

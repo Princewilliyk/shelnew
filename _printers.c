@@ -72,7 +72,7 @@ void print_digits(unsigned int n)
 	}
 }
 /**
- * print - prints a evector
+ * print - prints a vector
  * @av: vector
 */
 void print(char **av)
