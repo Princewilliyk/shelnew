@@ -65,25 +65,25 @@ void executer(const char *path, char **argv, char **env);
 
 typedef struct passinfo
 {
-        char *arg;
-        char **argv;
-        char *path;
-        int argc;
-        unsigned int line_count;
-        int err_num;
-        int linecount_flag;
-        char *fname;
-        list_t *env;
-        list_t *history;
-        list_t *alias;
-        char **environ;
-        int env_changed;
-        int status;
+	char *arg;
+	char **argv;
+	char *path;
+	int argc;
+	unsigned int line_count;
+	int err_num;
+	int linecount_flag;
+	char *fname;
+	list_t *env;
+	list_t *history;
+	list_t *alias;
+	char **environ;
+	int env_changed;
+	int status;
 
-        char **cmd_buf;
-        int cmd_buf_type;
-        int readfd;
-        int histcount;
+	char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
+	int cmd_buf_type; /* CMD_type ||, &&, ; */
+	int readfd;
+	int histcount;
 } informer_me;
 
 #endif
