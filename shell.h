@@ -14,6 +14,7 @@
 #include <errno.h>
 #include <signal.h>
 #include <stdbool.h>
+#include <limits.h>
 
 /* for read & write buffers */
 #define READ_BUFSIZE 1024
@@ -27,18 +28,21 @@ int _put(const char *str);
 void print_digits(unsigned int n);
 void print(char **av);
 
-/* handle errors print*/
-void _eputs(char *str);
-int _eputchar(char c);
-int _erratoi(char *s);
-void print_error(informer_me *info, char *estr);
-int print_d(int input, int fd);
-
-/* exit proto*/
-int exit(informer_me *info);
-
 /*handles execve*/
 void executer(const char *path, char **argv, char **env);
+
+/**
+ * struct liststr - singly linked list
+ * @num: the number field
+ * @str: a string
+ * @next: points to the next node
+ */
+typedef struct liststr
+{
+	int num;
+	char *str;
+	struct liststr *next;
+} list_t;
 
 /**
  *struct passinfo - contains pseudo-arguements to pass into a function,
@@ -85,5 +89,15 @@ typedef struct passinfo
 	int readfd;
 	int histcount;
 } informer_me;
+
+/* handle errors print*/
+void _eputs(char *str);
+int _eputchar(char c);
+int _erratoi(char *s);
+void print_error(informer_me *info, char *);
+int print_d(int input, int fd);
+
+/* exit proto*/
+int my_exit(informer_me *info);
 
 #endif

@@ -1,18 +1,19 @@
+#include "shell.h"
 /**
- * exit - exits the shell
+ * my_exit - exits the shell
  * @info: Structure containing potential arguments. Used to maintain
  *          constant function prototype.
  *  Return: exits with a given exit status
  *         (0) if info.argv[0] != "exit"
  */
-int exit(informer_me *info)
+int my_exit(informer_me *info)
 {
-	int exitcheck;
+	int my_exitcheck;
 
 	if (info->argv[1])  /* If there is an exit arguement */
 	{
-		exitcheck = _erratoi(info->argv[1]);
-		if (exitcheck == -1)
+		my_exitcheck = _erratoi(info->argv[1]);
+		if (my_exitcheck == -1)
 		{
 			info->status = 2;
 			print_error(info, "Illegal number: ");
