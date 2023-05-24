@@ -13,7 +13,7 @@
 #include <dirent.h>
 #include <errno.h>
 #include <signal.h>
-
+#include <stdbool.h>
 /* handle strings print*/
 int _putchar(char c);
 int _puts(const char *str);
@@ -21,9 +21,6 @@ int _put(const char *str);
 void print_digits(unsigned int n);
 void print(char **av);
 
-/*getline function proto*/
-ssize_t _getlines(char **lineptr, size_t *n, FILE *stream);
-
-void shprompt(char **av, char **env);
+void executer(const char *path, char **argv, char **env);
 
 #endif
