@@ -15,24 +15,15 @@ int main(int argc, char *argv[], char **env)
 	ssize_t get_char;
 	pid_t childprog;
 	int status;
-<<<<<<< HEAD
-	bool from_pipe =  false;
-=======
 	bool from_pipe = false;
->>>>>>> parent of 0a33399... task 1 fix a
 	(void)argc;
 
 	while (1 && !from_pipe)
 	{
 		if (isatty(STDIN_FILENO == 0))
 		{
-<<<<<<< HEAD
-		 	_put("shellinput$ ");
-			from_pipe = true;
-=======
 			from_pipe = true;
 			_put("shellinput$ ");
->>>>>>> parent of 0a33399... task 1 fix a
 		}
 		get_char = getline(&input, &input_size, stdin);
 		if (get_char == -1)
@@ -76,5 +67,4 @@ void executer(const char *path, char **argv, char **env)
 		perror("Error (execve)");
 		exit(EXIT_FAILURE);
 	}
-
 }

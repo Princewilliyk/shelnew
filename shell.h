@@ -14,6 +14,13 @@
 #include <errno.h>
 #include <signal.h>
 #include <stdbool.h>
+#include <limits.h>
+
+/* for read & write buffers */
+#define READ_BUFSIZE 1024
+#define WRITE_BUFSIZE 1024
+#define BUF_FLUSHER -1
+
 /* handle strings print*/
 int _putchar(char c);
 int _puts(const char *str);
@@ -21,22 +28,25 @@ int _put(const char *str);
 void print_digits(unsigned int n);
 void print(char **av);
 
-/* handle errors print*/
-void _eputs(char *str);
-int _eputchar(char c);
-int _erratoi(char *s);
-void print_error(info_t *info, char *estr);
-int print_d(int input, int fd);
-
-/* exit proto*/
-int exit(informer_me *info);
-
 /*handles execve*/
 void executer(const char *path, char **argv, char **env);
 
 /**
+ * struct liststr - singly linked list
+ * @num: the number field
+ * @str: a string
+ * @next: points to the next node
+ */
+typedef struct liststr
+{
+	int num;
+	char *str;
+	struct liststr *next;
+} list_t;
+
+/**
  *struct passinfo - contains pseudo-arguements to pass into a function,
- *		allowing uniform prototype for function pointer struct
+ *              allowing uniform prototype for function pointer struct
  *@arg: a string generated from getline containing arguements
  *@argv: an array of strings generated from arg
  *@path: a string path for the current command
@@ -56,6 +66,7 @@ void executer(const char *path, char **argv, char **env);
  *@readfd: the fd from which to read line input
  *@histcount: the history line number count
  */
+
 typedef struct passinfo
 {
 	char *arg;
@@ -73,10 +84,20 @@ typedef struct passinfo
 	int env_changed;
 	int status;
 
-	char **cmd_buf;
-	int cmd_buf_type;
+	char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
+	int cmd_buf_type; /* CMD_type ||, &&, ; */
 	int readfd;
 	int histcount;
 } informer_me;
+
+/* handle errors print*/
+void _eputs(char *str);
+int _eputchar(char c);
+int _erratoi(char *s);
+void print_error(informer_me *info, char *);
+int print_d(int input, int fd);
+
+/* exit proto*/
+int my_exit(informer_me *info);
 
 #endif
