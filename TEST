@@ -1,0 +1,1 @@
+gcc -wall -werror -wextra -pendantic *.c -0 seashell
