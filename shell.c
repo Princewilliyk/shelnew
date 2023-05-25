@@ -25,26 +25,21 @@ int main(int argc, char *argv[], char **env)
 			from_pipe = true;
 			_put("shellinput$ ");
 		}
-		get_char = getline(&input, &input_size, stdin);
+		get_char = _getline(&input, &input_size, stdin);
 		if (get_char == -1)
-		{
-			perror("Error (getline)");
-			free(input);
-			exit(EXIT_FAILURE);
-		}
-		if (input[get_char - 1] == '\n')
-			input[get_char - 1] = '\0';
+			perror("");
+			return 0;
 		childprog = fork();
 		if (childprog == -1)
 		{
-			perror("Error (fork)");
+			perror("");
 			exit(EXIT_FAILURE);
 		}
 		if (childprog == 0)
 			executer(input, argv, env);
 		if ((waitpid(childprog, &status, 0)) == -1)
 		{
-			perror("Error (waitpid)");
+			perror("");
 			exit(EXIT_FAILURE);
 		}
 	}
@@ -66,7 +61,7 @@ void executer(char *argment, char **argv, char **env)
 
 	if (execve(argv[0], argv, env) == -1)
 	{
-		perror("Error (execve)");
+		perror("");
 		exit(EXIT_FAILURE);
 	}
 }
