@@ -15,12 +15,14 @@ int main(int argc, char *argv[], char **env)
 	ssize_t get_char;
 	pid_t childprog;
 	int status;
+	bool from_pipe = false;
 	(void)argc;
 
-	while (1)
+	while (1 && !from_pipe)
 	{
-		if (isatty(STDIN_FILENO))
+		if (isatty(STDIN_FILENO) == 0)
 		{
+			from_pipe = true;
 			_put("shellinput$ ");
 		}
 		get_char = getline(&input, &input_size, stdin);
