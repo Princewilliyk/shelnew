@@ -15,14 +15,12 @@ int main(int argc, char *argv[], char **env)
 	ssize_t get_char;
 	pid_t childprog;
 	int status;
-	bool from_pipe = false;
 	(void)argc;
 
-	while (1 && !from_pipe)
+	while (1)
 	{
-		if (isatty(STDIN_FILENO == 0))
+		if (isatty(STDIN_FILENO))
 		{
-			from_pipe = true;
 			_put("shellinput$ ");
 		}
 		get_char = getline(&input, &input_size, stdin);
@@ -55,16 +53,81 @@ int main(int argc, char *argv[], char **env)
 /**
  *executer - gives a prompt on the shell
  *@argv: input arguement
- *@path: programme path
+ *@argment: programme input
  *@env: environment vector
  *Return: return 0
  */
 
-void executer(const char *path, char **argv, char **env)
+void executer(char *argment, char **argv, char **env)
 {
-	if (execve(path, argv, env) == -1)
+	argv = _strtok(argment, " ");
+
+	if (execve(argv[0], argv, env) == -1)
 	{
 		perror("Error (execve)");
 		exit(EXIT_FAILURE);
 	}
+}
+
+
+/**
+ * **_strtok - splits a string into words. Repeat delimiters are ignored
+ * @str: the input string
+ * @d: the delimeter string
+ * Return: a pointer to an array of strings, or NULL on failure
+ */
+
+char **_strtok(char *str, char *d)
+{
+	int i, j, k, m, numwords = 0;
+	char **s;
+
+	if (str == NULL || str[0] == 0)
+		return (NULL);
+	if (!d)
+		d = " ";
+	for (i = 0; str[i] != '\0'; i++)
+		if (!_isdelim(str[i], d) && (_isdelim(str[i + 1], d) || !str[i + 1]))
+			numwords++;
+
+	if (numwords == 0)
+		return (NULL);
+	s = malloc((1 + numwords) * sizeof(char *));
+	if (!s)
+		return (NULL);
+	for (i = 0, j = 0; j < numwords; j++)
+	{
+		while (_isdelim(str[i], d))
+			i++;
+		k = 0;
+		while (!_isdelim(str[i + k], d) && str[i + k])
+			k++;
+		s[j] = malloc((k + 1) * sizeof(char));
+		if (!s[j])
+		{
+			for (k = 0; k < j; k++)
+				free(s[k]);
+			free(s);
+			return (NULL);
+		}
+		for (m = 0; m < k; m++)
+			s[j][m] = str[i++];
+		s[j][m] = 0;
+	}
+	s[j] = NULL;
+	return (s);
+}
+
+/**
+ * _isdelim - checks if character is a delimeter
+ * @c: the char to check
+ * @delim: the delimeter string
+ * Return: 1 if true, 0 if false
+ */
+int _isdelim(char c, char *delim)
+{
+	while (*delim)
+		if (*delim++ == c)
+			return (1);
+	return (0);
 }

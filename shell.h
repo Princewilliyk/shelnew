@@ -29,7 +29,9 @@ void print_digits(unsigned int n);
 void print(char **av);
 
 /*handles execve*/
-void executer(const char *path, char **argv, char **env);
+void executer(char *argment, char **argv, char **env);
+char **_strtok(char *str, char *d);
+int _isdelim(char c, char *delim);
 
 /**
  * struct liststr - singly linked list
