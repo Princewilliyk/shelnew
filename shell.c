@@ -25,10 +25,12 @@ int main(int argc, char *argv[], char **env)
 			from_pipe = true;
 			_put("shellinput$ ");
 		}
-		get_char = _getline(&input, &input_size, stdin);
+		get_char = getline(&input, &input_size, stdin);
 		if (get_char == -1)
+		{
 			perror("");
-			return 0;
+			return (0);
+		}
 		childprog = fork();
 		if (childprog == -1)
 		{
@@ -64,67 +66,4 @@ void executer(char *argment, char **argv, char **env)
 		perror("");
 		exit(EXIT_FAILURE);
 	}
-}
-
-
-/**
- * **_strtok - splits a string into words. Repeat delimiters are ignored
- * @str: the input string
- * @d: the delimeter string
- * Return: a pointer to an array of strings, or NULL on failure
- */
-
-char **_strtok(char *str, char *d)
-{
-	int i, j, k, m, numwords = 0;
-	char **s;
-
-	if (str == NULL || str[0] == 0)
-		return (NULL);
-	if (!d)
-		d = " ";
-	for (i = 0; str[i] != '\0'; i++)
-		if (!_isdelim(str[i], d) && (_isdelim(str[i + 1], d) || !str[i + 1]))
-			numwords++;
-
-	if (numwords == 0)
-		return (NULL);
-	s = malloc((1 + numwords) * sizeof(char *));
-	if (!s)
-		return (NULL);
-	for (i = 0, j = 0; j < numwords; j++)
-	{
-		while (_isdelim(str[i], d))
-			i++;
-		k = 0;
-		while (!_isdelim(str[i + k], d) && str[i + k])
-			k++;
-		s[j] = malloc((k + 1) * sizeof(char));
-		if (!s[j])
-		{
-			for (k = 0; k < j; k++)
-				free(s[k]);
-			free(s);
-			return (NULL);
-		}
-		for (m = 0; m < k; m++)
-			s[j][m] = str[i++];
-		s[j][m] = 0;
-	}
-	s[j] = NULL;
-	return (s);
-}
-
-/**
- * _isdelim - checks if character is a delimeter
- * @c: the char to check
- * @delim: the delimeter string
- * Return: 1 if true, 0 if false
- */
-int _isdelim(char c, char *delim)
-{
-	while (*delim)
-		if (*delim++ == c)
-			return (1);
-	return (0);
 }

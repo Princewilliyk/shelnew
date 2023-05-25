@@ -7,10 +7,12 @@
  * Return: On success 1.
  * On error, -1 is returned, and errno is set appropriately.
  */
+
 int _putchar(char c)
 {
 	return (write(1, &c, 1));
 }
+
 /**
  * _puts - prints string followed by new line
  * @str: string to print
@@ -29,6 +31,7 @@ int _puts(const char *str)
 	c += _putchar('\n');
 	return (c);
 }
+
 /**
  * _put - prints string but not followed by new line
  * @str: string to print
@@ -46,6 +49,7 @@ int _put(const char *str)
 	}
 	return (c);
 }
+
 /**
  * print_digits - print any given number8
  * Description: print  any number
@@ -71,10 +75,12 @@ void print_digits(unsigned int n)
 		}
 	}
 }
+
 /**
  * print - prints a vector
  * @av: vector
 */
+
 void print(char **av)
 {
 	int i;

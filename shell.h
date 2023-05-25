@@ -15,23 +15,12 @@
 #include <signal.h>
 #include <stdbool.h>
 #include <limits.h>
+#include <stddef.h>
 
 /* for read & write buffers */
 #define READ_BUFSIZE 1024
 #define WRITE_BUFSIZE 1024
 #define BUF_FLUSHER -1
-
-/* handle strings print*/
-int _putchar(char c);
-int _puts(const char *str);
-int _put(const char *str);
-void print_digits(unsigned int n);
-void print(char **av);
-
-/*handles execve*/
-void executer(char *argment, char **argv, char **env);
-char **_strtok(char *str, char *d);
-int _isdelim(char c, char *delim);
 
 /**
  * struct liststr - singly linked list
@@ -85,12 +74,23 @@ typedef struct passinfo
 	char **environ;
 	int env_changed;
 	int status;
-
-	char **cmd_buf; /* pointer to cmd ; chain buffer, for memory mangement */
-	int cmd_buf_type; /* CMD_type ||, &&, ; */
+	char **cmd_buf;
+	int cmd_buf_type;
 	int readfd;
 	int histcount;
 } informer_me;
+
+/* handle strings print*/
+int _putchar(char c);
+int _puts(const char *str);
+int _put(const char *str);
+void print_digits(unsigned int n);
+void print(char **av);
+
+/*handles execve*/
+void executer(char *argment, char **argv, char **env);
+char **_strtok(char *str, char *d);
+int _isdelim(char c, char *delim);
 
 /* handle errors print*/
 void _eputs(char *str);
