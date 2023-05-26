@@ -1,7 +1,4 @@
 #include "shell.h"
-
-#define MAX_COMMAND 100
-
 /**
  *prompt - gives a prompt on the shell
  *@av: arguement vector
@@ -15,7 +12,6 @@ int prompt(char **av, char **env)
 	size_t input_size = 0;
 	ssize_t get_char;
 	pid_t childprog;
-	char *argv[MAX_COMMAND];
 
 	while (1)
 	{
@@ -38,7 +34,7 @@ int prompt(char **av, char **env)
 			exit(EXIT_FAILURE);
 		}
 		if (childprog == 0)
-			executer(input, argv, env);
+			executer(input, av, env);
 		else
 		{
 			int status;
