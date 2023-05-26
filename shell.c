@@ -31,6 +31,8 @@ int main(int argc, char *argv[], char **env)
 			perror("");
 			return (0);
 		}
+		if (input[get_char - 1] == '\n')
+			input[get_char - 1] = '\0';
 		childprog = fork();
 		if (childprog == -1)
 		{

@@ -102,4 +102,14 @@ int print_d(int input, int fd);
 /* exit proto*/
 int my_exit(informer_me *info);
 
+/*string functions*/
+char *_strcat(char *dest, char *src);
+char *starts_with(const char *haystack, const char *needle);
+int _strcmp(char *s1, char *s2);
+int _strlen(char *s);
+char *_strdup(const char *str);
+char *_strcpy(char *dest, char *src);
+
+
+
 #endif
