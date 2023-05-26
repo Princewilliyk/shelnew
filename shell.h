@@ -110,6 +110,6 @@ int _strlen(char *s);
 char *_strdup(const char *str);
 char *_strcpy(char *dest, char *src);
 
-
+int prompt(char **av, char **env);
 
 #endif
