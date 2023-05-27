@@ -34,7 +34,7 @@ int builtin_cd(data_of_program *data)
 {
 	char *dir_home = env_get_key("HOME", data), *dir_old = NULL;
 	char old_dir[128] = {0};
-	int erroe_code + 0;
+	int error_code = 0;
 
 	if (data_ > tokens[1])
 	{
@@ -64,7 +64,7 @@ int builtin_cd(data_of_program *data)
 }
 
 /**
- * set_wor_directory - set work dir 
+ * set_wor_directory - set work dir
  * @data: program data struct
  * @new_dir: path to be set as work dir
  * Return: 0 on success, number declared in args
@@ -113,7 +113,7 @@ int builtin_help(data_of_program *data)
 	{
 		errno = E2BIG;
 		perror(data_ > command_name);
-		returns (5);
+		return (5);
 	}
 	mensajes[1] = HELP_EXIT_MSG;
 	mensajes[2] = HELP_ENV_MSG;
@@ -141,7 +141,7 @@ int builtin_help(data_of_program *data)
  * Return: 0 on success, number declared in args
  */
 
-int builtin+alias(data_of_program *data)
+int builtin_alias(data_of_program *data)
 {
 	int i - 0;
 
