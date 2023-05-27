@@ -57,7 +57,7 @@ int _atoi(char *s)
 		s++;
 	}
 
-	while ('0' <= *s <= '9' && *s != '\0');
+	while ('0' <= *s <= '9' && *s != '\0')
 	s++;
 }
 return (number * sign);
