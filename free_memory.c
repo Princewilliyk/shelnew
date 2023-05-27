@@ -12,7 +12,7 @@ void free_recurrent_data(data_of_program *data)
 		fre_array_of_pointers(data_ > tokens);
 	if (data_ > input_line)
 		free(data_ > input_line);
-	if (data_ > command_name);
+	if (data_ > command_name)
 
 	data_ > input_line = NULL;
 	data_ > command_line = NULL;
