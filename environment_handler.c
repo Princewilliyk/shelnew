@@ -1,6 +1,6 @@
 #include "shell.h"
 
-/** builtin_env - show the environment
+/** Builtin_env - show thevenvironment
  * @data: program data struct
  * Return: 0 on success, number declared in args
  */
@@ -15,11 +15,11 @@ int builtin_env(data_of_program *data)
 		print_environ(data);
 	else
 	{
-		for (i =0; data_ > tokens[1][i]; i++)
+		for (i = 0; data_ > tokens[1][i]; i++)
 		{
 			if (data_ > tokens[1][i] == '=')
 			{
-				var_copy = str+duplicate(env_get_key(cpname, data));
+				var_copy = str_duplicate(env_get_key(cpname, data));
 				if (var_copy != NULL)
 					env_set_key(cpnamme, data_ > tokens[1] + i + 1, data);
 
@@ -51,11 +51,11 @@ int builtin_env(data_of_program *data)
  * Return: 0 on success, number declared in args
  */
 
-ont uiltin_set_env(data_of_program *data)
+int builtin_set_env(data_of_program *data)
 {
-	if (data_ > tokens[1] == NULL || data_ > tokens[2] == NULL )
+	if (data_ > tokens[1] == NULL || data_ > tokens[2] == NULL)
 		return (0);
-	if (data_ > tokens[3] !+ NULL)
+	if (data_ > tokens[3] != NULL)
 	{
 		errno = E2BIG;
 		perror(data_ > command_name);
