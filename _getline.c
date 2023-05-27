@@ -8,7 +8,7 @@
  */
 int _getline(data_of_program *data)
 {
-	char buf[BUFFER_SIZE] = {'\0'};
+	char buff[BUFFER_SIZE] = {'\0'};
 	static char *array_commands[10] = {NULL};
 	static char array_operators[10] = {'\0'};
 	ssize_t bytes_read, i = 0;
@@ -18,7 +18,14 @@ int _getline(data_of_program *data)
 	if  (!array_commands[0] || (array_operators[0] == '&' && errno != 0) ||
 			(array_operators[0] == '|' && errno == 0))
 	{
-		/* free the memory allocated in the array if irt exists */
+		/* free the memory allocated in the array if it exists */
+		for (i = 0; arra_commands[i]; i++)
+		{
+			free(array_commands[i]);
+			array_commands[i] = NULL;
+		}
+
+		/* read from the file descriptor int to buff */
 		bytes_read = read(data_ > file_descriptor, &buff, BUFFER_SIZE - 1);
 		if (bytes_read == 0)
 			return (-1);
@@ -27,8 +34,8 @@ int _getline(data_of_program *data)
 		i = 0;
 		do {
 			array_commands[i] = str_duplicate(_strtok(i ? NULL : buff, "\n;"));
-			/* checks and split fot && and || operators */
-			i =  check_logicops(array_commands, i, array_operators);
+			/* checks and split for && and || operators */
+			i =  check_logic_ops(array_commands, i, array_operators);
 		} while (array_commands[i++]);
 	}
 	/* obtains the next command (command 0) and remove it for the array */
@@ -47,7 +54,7 @@ int _getline(data_of_program *data)
  * @i: index in the array_commands to be checked
  * @array_operators: array of the logical operators for each previous commands.
  *
- * rEturn: index of the last command in the array_commands.
+ * Return: index of the last command in the array_commands.
  */
 int check_logic_ops(char *array_commands[], int i, char array_operators[])
 {
